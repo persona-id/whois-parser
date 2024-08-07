@@ -7,3 +7,6 @@
 /.yardoc
 /_yardoc/
 /doc/
+
+# Ignore locally installed Ruby gems/Node modules
+/vendor/bundle
