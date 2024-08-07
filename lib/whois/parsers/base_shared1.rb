@@ -49,8 +49,16 @@ module Whois
         !(respond_to?(:reserved?) && reserved?) && !available?
       end
 
+      property_supported :created_on do
+        if content_for_scanner =~ /Domain Registration Date\s+(.*)\n/
+          node("Domain Registration Date") { |value| parse_time(value) }
+        elsif content_for_scanner =~ /Creation Date:\s+(.*)\n/
+          node("Creation Date") { |value| parse_time(value) }
+        elsif content_for_scanner =~ /created date:\s+(.*)\n/
+          node("created date") { |value| parse_time(value) }
+        end
+      end
 
-      property_not_supported :created_on
 
       property_not_supported :updated_on
 
